@@ -8,7 +8,16 @@ header('Access-Control-Max-Age: 315360000');
 require_once './config.php';
 $id=$_GET['id'];
 if($_SERVER['REQUEST_METHOD'] == "GET"){
-    $sql=mysql_query("select * from wenzhang WHERE parentId='$id'");
+
+    if($id==1){
+         $sql1=mysql_query("select id from user WHERE operation=1")or die('sql错误');
+          $data1 = array();
+             while ($row1 = mysql_fetch_array($sql1)) {
+                 $data1[] = $row1;
+             }
+        $id=($data1[0]['id']);
+        }
+    $sql=mysql_query("select * from wenzhang WHERE parentId='$id' ORDER BY id DESC");
     $data = array();
     while ($row = mysql_fetch_array($sql)) {
         $data[] = $row;

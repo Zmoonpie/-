@@ -9,10 +9,12 @@ import AddShow from './nav/showAdd'
 import Toupiao from './nav/toupiao'
 import ShowToupiao from './nav/showToupiao'
 import Choujiang from './nav/choujiang'
+import MyInfo from './nav/myInfo'
 
 ReactDOM.render(
     <Layout>
       <Route  exact path="/" component={List}/>
+        <Route path='/demo1' component={MyInfo}/>
       <Route  path="/demo2" component={Add} />
         <Route path="/addArticle" component={Addartcle}/>
         <Route path="/demo3" component={AddShow}/>

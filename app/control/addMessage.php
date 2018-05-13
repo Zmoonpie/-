@@ -9,20 +9,13 @@ require_once './config.php';
 $xmldata=$GLOBALS['HTTP_RAW_POST_DATA'];
 $data=json_decode($xmldata);
 $id=$data->id;
-$title=$data->title ;
-$content=$data->content ;
-$pageView=$data->pageView;
+$wzID=$data->wzID;
+$message=$data->message ;
+$time=date('y-m-d h:i:s',time());
+$name=$data->name;
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
- if($id==1){
-         $sql1=mysql_query("select id from user WHERE operation=1")or die('sql错误');
-          $data1 = array();
-             while ($row1 = mysql_fetch_array($sql1)) {
-                 $data1[] = $row1;
-             }
-        $id=($data1[0]['id']);
-        }
-    $sql=mysql_query("insert into wenzhang (title,content,date,parentId,pageView) VALUES ( '$title' ,'$content',NOW(),'$id','$pageView')") or die('新增失败'.mysql_error());
+    $sql=mysql_query("insert into message (id,wzID,message,name,time) VALUES ( '$id' ,'$wzID','$message','$name','$time')") or die('新增失败'.mysql_error());
     echo mysql_affected_rows();
     mysql_close();
 }

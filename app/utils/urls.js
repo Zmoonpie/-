@@ -5,7 +5,6 @@ const urls = {
     setRegister: (data)=>localhost+`/testdemo/app/control/register.php?username=${data.username}&password=${data.password}&tel=${data.tel}`,
     getLoginPeo:()=>localhost+`/testdemo/app/control/getLogin.php`,
     loginOut:(data)=>localhost+`/testdemo/app/control/loginout.php?id=${data}`,
-    //addArtcle:(data)=>localhost+`/testdemo/app/control/addArticle.php?id=${data.id}&title=${data.title}&content=${data.content}`,
     addArtcle:()=>localhost+`/testdemo/app/control/addArticle.php`,
     getMyArticle:(data)=>localhost+`/testdemo/app/control/getMyArticle.php?id=${data}`,
     getEditArt:(data)=>localhost+`/testdemo/app/control/getEditArt.php?id=${data}`,
@@ -21,6 +20,12 @@ const urls = {
     isRegister:(data)=>localhost+`/testdemo/app/control/isRegister.php?username=${data}`,
     updata:()=>localhost+`/testdemo/app/control/updata.php`,
     getPageViwe:(id)=>localhost+`/testdemo/app/control/getPageView.php?id=${id}`,
+    addMessage:()=>localhost+'/testdemo/app/control/addMessage.php',
+    getMessage:(id)=>localhost+`/testdemo/app/control/getMyMessage.php?id=${id}`,
+    cancelMessage:(id)=>localhost+`/testdemo/app/control/cancelMessage.php?id=${id}`,
+    getMyinfo:()=>localhost+'/testdemo/app/control/getMyInfo.php',
+    getOperationUser:()=>localhost+'/testdemo/app/control/getOperationUser.php',
+    setOperationUser:(id)=>localhost+`/testdemo/app/control/setOperationUser.php?id=${id}` ,
 }
 
 export default urls

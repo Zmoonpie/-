@@ -10,6 +10,8 @@ $id=$_GET['id'];
 
 if($_SERVER['REQUEST_METHOD'] == "GET") {
 
+
+
     $sql = mysql_query("select * from toupiaocount WHERE parentId='$id'");
     $data = array();
     while ($row = mysql_fetch_array($sql)) {

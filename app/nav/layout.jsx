@@ -22,6 +22,7 @@ export default class SiderDemo extends React.Component {
           username:'',
           regVisible:false,
           loginData:null,
+          operationUser:null
 
       }
   }
@@ -29,12 +30,22 @@ export default class SiderDemo extends React.Component {
   componentDidMount() {
     this.getRoute();
     this.getLogin()
+      this.getOperationUser()
   }
+
+    getOperationUser(){
+      webApi.get(urls.getOperationUser()).then((result)=>{
+          if(result.length>0){
+              this.setState({operationUser:result[0]})
+          }
+      })
+    }
 
   getRoute() {
 
     var result = [
       { "name": "我的文章", "path": "/", "icon": "file" },
+        {"name":"我的公众号","path":"/demo1","icon":"user"},
       { "name": "自动回复配置", "path": "/demo2", "icon": "user" },
         { "name": "自动回复演示", "path": "/demo3", "icon": "user" },
         { "name": "投票配置", "path": "/demo4", "icon": "file" },
@@ -186,7 +197,7 @@ export default class SiderDemo extends React.Component {
             <Content style={{ margin: '0 16px' }}>
               <Breadcrumb style={{ margin: '12px 0' }}>
                 <Breadcrumb.Item><Link to='/'>首页</Link></Breadcrumb.Item>
-                <Breadcrumb.Item>演示</Breadcrumb.Item>
+                  {this.state.operationUser&&<Breadcrumb.Item>当前操作公众号：{this.state.operationUser.username}</Breadcrumb.Item>}
               </Breadcrumb>
               <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                 {this.props.children}

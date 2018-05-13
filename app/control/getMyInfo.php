@@ -6,14 +6,18 @@ header('Access-Control-Allow-Methods:GET, POST, PUT, DELETE, PATCH');
 header('Access-Control-Allow-Headers:X-Requested-With, content-type, Authorization');
 header('Access-Control-Max-Age: 315360000');
 require_once './config.php';
-$id=$_GET['id'];
-
 if($_SERVER['REQUEST_METHOD'] == "GET"){
-    $sql=mysql_query("select * from wenzhang WHERE id='$id' ");
+    $sql=mysql_query("select * from user  ORDER BY id ");
     $data = array();
     while ($row = mysql_fetch_array($sql)) {
         $data[] = $row;
     }
-    echo json_encode($data);
+    $result=array(
+    "flag"=>true,
+    "userInfo"=>$data
+    );
+    echo json_encode($result);
     mysql_close();
 }
+
+?>

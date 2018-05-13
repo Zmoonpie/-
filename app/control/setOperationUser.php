@@ -9,11 +9,8 @@ require_once './config.php';
 $id=$_GET['id'];
 
 if($_SERVER['REQUEST_METHOD'] == "GET"){
-    $sql=mysql_query("select * from wenzhang WHERE id='$id' ");
-    $data = array();
-    while ($row = mysql_fetch_array($sql)) {
-        $data[] = $row;
-    }
-    echo json_encode($data);
-    mysql_close();
+     $sql1=mysql_query("update user set operation=0 WHERE operation=1") or die('编辑失败'.mysql_error());
+     $sql=mysql_query("update user set operation=1 WHERE id='$id'") or die('编辑失败'.mysql_error());
+       echo mysql_affected_rows();
+       mysql_close();
 }
