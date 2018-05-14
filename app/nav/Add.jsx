@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { Form, Input, Button,Layout,message} from 'antd'
+import { Form, Input, Button,Layout,message,Table} from 'antd'
 import {webApi} from "../utils/index";
 import  urls from '../utils/urls'
 const FormItem = Form.Item;
@@ -13,15 +13,24 @@ class Add extends Component{
         this.state={
             loginData:null,
             title:'',
-            content:''
+            content:'',
+            replyData:null
         }
+        this.colums=[
+            {title:'id',dataIndex:'id',key:'id'},
+            {title:'用户输入',dataIndex:'yonghu',key:'yonghu'},
+            {title:'自动回复',dataIndex:'xitong',key:'xitong'},
+            {title:'回复统计',dataIndex:'count',key:'count'},
+        ]
     }
     componentDidMount(){
         webApi.get(urls.getLoginPeo()).then((result)=>{
             this.setState({loginData:result[0]})
+            this.getMyReply(result[0].id)
         })
         // console.log(this.props.location.search.split('=')[1])
         if(this.props.location.search.split('=')[1]!=undefined){
+            debugger
             const ediId=this.props.location.search.split('=')[1]
             webApi.get(urls.getEditArt(ediId)).then((result)=>{
                 // console.log(result)
@@ -32,6 +41,12 @@ class Add extends Component{
             })
         }
 
+    }
+
+    getMyReply(id){
+        webApi.get(urls.getMyReply(id)).then((results)=>{
+            this.setState({replyData:results})
+        })
     }
 
     handleSubmit = (e) => {
@@ -46,6 +61,7 @@ class Add extends Component{
                 }
                     webApi.get(urls.reply(values)).then((result)=>{
                         message.info("配置成功")
+                        this.getMyReply(this.state.loginData.id)
                     })
                 }
         });
@@ -85,6 +101,12 @@ class Add extends Component{
                         </Button>
                     </FormItem>
                 </Form>
+
+                { this.state.replyData&&<Table
+                    columns={this.colums}
+                    dataSource={this.state.replyData}
+                >
+                </Table>}
             </div>
 
         )

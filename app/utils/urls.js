@@ -26,6 +26,10 @@ const urls = {
     getMyinfo:()=>localhost+'/testdemo/app/control/getMyInfo.php',
     getOperationUser:()=>localhost+'/testdemo/app/control/getOperationUser.php',
     setOperationUser:(id)=>localhost+`/testdemo/app/control/setOperationUser.php?id=${id}` ,
+    getMyReply:(id)=>localhost+`/testdemo/app/control/getMyReply.php?id=${id}` ,
+    addTsMessage:()=>localhost+'/testdemo/app/control/addTsMessage.php',
+    getTsMessage:(id)=>localhost+`/testdemo/app/control/getTsMessage.php?id=${id}`,
+    tsMessage:(id)=>localhost+`/testdemo/app/control/TsMessage.php?id=${id}`,
 }
 
 export default urls

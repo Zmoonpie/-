@@ -30,11 +30,18 @@ export default class MyInfo extends Component{
             if(result.flag){
                 result.userInfo.forEach((item)=>{
                     if(item.username!='admin'){
-                        data.push(item)
+                        webApi.get(urls.getMyArticle(item.id)).then((result)=>{
+                           const count=result.length
+                            item.wzCount=count
+                            data.push(item)
+                        })
+
                     }
                 })
-                this.setState({userInfo:data})
-                setTimeout(()=>console.log(this.state.userInfo),100)
+
+                setTimeout(()=>{
+                    this.setState({userInfo:data})
+                },200)
             }
         })
     }
@@ -47,6 +54,12 @@ export default class MyInfo extends Component{
        })
     }
 
+    getWenzhangCount(id){
+        webApi.get(urls.getMyArticle(id)).then((result)=>{
+            count=result.length
+        })
+    }
+
     getCard(){
         const {userInfo}=this.state
         let data=[]
@@ -57,7 +70,10 @@ export default class MyInfo extends Component{
                     title='确认要操作该账号吗？'
                     onConfirm={this.onConfirm.bind(this,item.id)}
                     >
-                        <Card style={{marginBottom:'10px'}} title={item.username} bordered={false}>Card content</Card>
+                        <Card style={{marginBottom:'10px'}} title={item.username} bordered={false}>
+                            ID:{item.id}<br/>
+                            文章数：{item.wzCount}
+                        </Card>
                     </Popconfirm>
 
                 </Col>

@@ -46,6 +46,7 @@ export default class SiderDemo extends React.Component {
     var result = [
       { "name": "我的文章", "path": "/", "icon": "file" },
         {"name":"我的公众号","path":"/demo1","icon":"user"},
+        {"name":'推送消息设置',"path":'/demo7',"icon":'file'},
       { "name": "自动回复配置", "path": "/demo2", "icon": "user" },
         { "name": "自动回复演示", "path": "/demo3", "icon": "user" },
         { "name": "投票配置", "path": "/demo4", "icon": "file" },
