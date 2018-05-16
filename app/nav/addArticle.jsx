@@ -78,6 +78,12 @@ class Addartcle extends Component{
         })
     }
     submit(){
+        if(this.state.loginData.id==1){
+            message.error('当前登录者为管理员，不可添加文章！')
+            return false
+        }
+
+
         let values={
             content:this.state.content,
             id:this.state.loginData.id,
@@ -251,7 +257,7 @@ class Addartcle extends Component{
                         <div dangerouslySetInnerHTML={{__html:this.state.content}}></div>
                         <div style={{float:'right',marginLeft:'5px'}}>{this.state.messageCount}</div>
                         <Icon style={{float:'right',fontSize:'20px'}} type="message" />
-                        <div style={{float:'right',fontSize:'14px',marginRight:'10px'}}>阅读  {this.state.pageView}</div>
+                        <div style={{float:'right',fontSize:'14px',marginRight:'10px'}}>阅读  {this.state.pageView&&this.state.pageView}</div>
                     </div>
                     <br/>
                      <div>
